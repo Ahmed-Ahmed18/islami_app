@@ -10,16 +10,30 @@ class MyThemData {
         color: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-      ),
+          titleTextStyle: TextStyle(
+              fontFamily: 'El Messiri',
+              fontSize: 30,
+              fontWeight: FontWeight.bold)),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.primarylightcolor,
           selectedItemColor: AppColors.blackcolor,
           selectedIconTheme: IconThemeData(size: 35),
-          unselectedIconTheme: IconThemeData(size: 20)),
+          unselectedIconTheme: IconThemeData(size: 30)),
       textTheme: TextTheme(
           bodyLarge: TextStyle(
         color: AppColors.blackcolor,
         fontWeight: FontWeight.bold,
         fontSize: 30,
-      )));
+        ),
+        bodyMedium: TextStyle(
+            color: AppColors.blackcolor,
+            fontSize: 25,
+            fontWeight: FontWeight.w700,
+            fontFamily: 'El Messiri'),
+        bodySmall: TextStyle(
+          color: AppColors.blackcolor,
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+      ));
 }
