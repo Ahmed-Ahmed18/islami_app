@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islame_app/app_colors.dart';
 import 'package:islame_app/quran/item_sura_name.dart';
 import 'package:islame_app/quran/sura_details_screen.dart';
+import 'package:islame_app/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class Qurantab extends StatelessWidget {
   Qurantab({super.key});
@@ -124,6 +127,7 @@ class Qurantab extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<SettingsProvider>(context);
     return Column(
       children: [
         Image.asset(
@@ -133,35 +137,41 @@ class Qurantab extends StatelessWidget {
         Divider(
           height: 10,
           thickness: 3,
-          color: AppColors.primarylightcolor,
+          color: Theme.of(context).dividerTheme.color,
         ),
         Row(
           children: [
             Expanded(
                 child: Text(
-              'رقم السورة',
+              AppLocalizations.of(context)!.sura_number,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: provider.isDark()
+                      ? AppColorsdark.whitecolor
+                      : AppColors.blackcolor),
             )),
             SizedBox(
               height: 40,
               child: VerticalDivider(
-                color: AppColors.primarylightcolor,
+                color: Theme.of(context).dividerTheme.color,
                 thickness: 2,
               ),
             ),
             Expanded(
                 child: Text(
-              'أسم السورة',
+              AppLocalizations.of(context)!.sura_name,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: provider.isDark()
+                      ? AppColorsdark.whitecolor
+                      : AppColors.blackcolor),
             )),
           ],
         ),
         Divider(
           height: 10,
           thickness: 3,
-          color: AppColors.primarylightcolor,
+          color: Theme.of(context).dividerTheme.color,
         ),
         Expanded(
             child: ListView.separated(
@@ -169,7 +179,7 @@ class Qurantab extends StatelessWidget {
                   return Divider(
                     height: 10,
                     thickness: 2,
-                    color: AppColors.primarylightcolor,
+                    color: Theme.of(context).dividerTheme.color,
                   );
                 },
                 itemCount: names.length,

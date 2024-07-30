@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islame_app/app_colors.dart';
 import 'package:islame_app/hadeth/hadeth_details_screen.dart';
+import 'package:islame_app/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class HadethTab extends StatefulWidget {
   const HadethTab({super.key});
@@ -13,6 +16,7 @@ class HadethTab extends StatefulWidget {
 class _HadethTabState extends State<HadethTab> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<SettingsProvider>(context);
     if (datalist.isEmpty) loadHadethData();
     return Column(
       children: [
@@ -20,13 +24,19 @@ class _HadethTabState extends State<HadethTab> {
         Divider(
           height: 5,
           thickness: 6,
-          color: AppColors.primarylightcolor,
+          color: Theme.of(context).dividerTheme.color,
         ),
-        Text('ألاحاديث', style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          AppLocalizations.of(context)!.hadeth_name,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: provider.isDark()
+                  ? AppColorsdark.whitecolor
+                  : AppColors.blackcolor),
+        ),
         Divider(
           height: 5,
           thickness: 6,
-          color: AppColors.primarylightcolor,
+          color: Theme.of(context).dividerTheme.color,
         ),
         Expanded(
             child: ListView.separated(
@@ -39,13 +49,16 @@ class _HadethTabState extends State<HadethTab> {
                       child: Text(
                         datalist[index].tittle,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: provider.isDark()
+                                ? AppColorsdark.whitecolor
+                                : AppColors.blackcolor),
                       ),
                     ),
                 separatorBuilder: (context, index) => Divider(
                       height: 15,
                       thickness: 2,
-                      color: AppColors.primarylightcolor,
+                      color: Theme.of(context).dividerTheme.color,
                     ),
                 itemCount: datalist.length))
       ],
